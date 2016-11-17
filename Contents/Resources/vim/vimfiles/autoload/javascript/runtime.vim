@@ -31,6 +31,9 @@ except ImportError,e:
         print " "
         print "sudo ln -s %s /usr/lib" % os.path.join(vim.eval("s:install_dir"),'PyV8','libboost_python.so.1.50.0')
         print " "
+    else:
+        print "PyV8 is not supported "
+        print e
 EOF
 endif
 
