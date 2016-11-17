@@ -142,13 +142,15 @@ else
             let s:js_interpreter = "$JS_CMD"
         elseif executable('node')
             let s:js_interpreter = 'node'
-        elseif executable('/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc')
-            let s:js_interpreter = '/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc'
+        "elseif executable('/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc')
+            "let s:js_interpreter = '/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc'
         elseif executable('js')
             let s:js_interpreter = 'js'
         else
-            echoerr 'jsruntime.vim complains Not found a valid JS interpreter. Checked for jsc, js (spidermonkey), and node'
-            finish
+            echoerr 'jsruntime.vim complains Not found a valid JS interpreter. nodeJs is recommended.'
+            let s:js_interpreter = 'NotAvailable'
+			" finish will cause a lot of functions not found
+            " finish
         endif
     endif
 endif
