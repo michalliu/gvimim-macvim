@@ -21,7 +21,11 @@ sys.path.insert(0, vim.eval('s:install_dir'))
 
 try:
   # PyV8 js runtime use minimal namespace to avoid conflict with other plugin
-  from PyV8 import PyV8
+  import platform
+  if platform.system() == "Darwin":
+    from PyV8Mac import PyV8
+  else:
+    from PyV8 import PyV8
   vim.command('let s:python_support = 1')
 except ImportError,e:
     err = str(e)
