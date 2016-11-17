@@ -61,6 +61,9 @@ set shiftwidth=4
 " 出错时用闪屏代替声音
 set vb
 
+" 显示行号
+set nu
+
 " 常规设置
 if has("win32")
 
