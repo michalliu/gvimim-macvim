@@ -1,0 +1,56 @@
+<job>
+<script language="javascript">
+var alert = function (msg) {
+    //WScript.echo('ALERT: ' + msg) 
+};
+var console = {
+    _out: function (obj, name) {
+        name = name || '';
+        WScript.echo(name + obj);
+    },
+    log: function (obj) {
+        return console._out(obj);
+    },
+    debug: function (obj) {
+        return console._out(obj,"DEBUG: ");
+    },
+    info: function (obj) {
+        return console._out(obj,"INFO: ");
+    },
+    warn: function (obj) {
+        return console._out(obj,"WARN: ");
+    },
+    error: function (obj) {
+        return console._out(obj,"ERROR: ");
+    }
+};
+var readSTDIN = function() {
+    var line,
+        input = [],
+        emptyCount = 0,
+        i;
+
+    var stdIn = WScript.stdIn,
+        stdOut = WScript.stdOut;
+
+    while (!stdIn.atEndofStream) {
+        line = stdIn.readLine();
+        input.push(line);
+    }
+
+    return input.join("");
+};
+
+var body = readSTDIN() || arguments[0];
+try{
+console.log(eval(body));
+} catch (e) {
+var errorDetail=[];
+for (var k in e) {
+errorDetail.push(k + ":" + e[k]);
+}
+console.log(errorDetail.join("\n"));
+WScript.Quit(1);
+}
+</script>
+</job>
