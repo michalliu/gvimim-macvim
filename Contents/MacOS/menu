@@ -10,4 +10,4 @@ fi
 fi
 set -x
 rm -rf ~/.vim
-ln -sf $BASEDIR/vimfiles ~/.vim
+ln -sf $BASEDIR/../Resources/vim/vimfiles ~/.vim
