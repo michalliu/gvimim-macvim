@@ -26,7 +26,7 @@ Vim官网版只提供有限的功能，因为Vim的作者鼓励开发者独自�
 
 使用说明
 --------
-1. 支持的平台 Mac Only Windows/Linux用户请移步 https://github.com/michalliu/gvimim
+1. 支持的平台 Mac Only。 Windows/Linux用户请移步 https://github.com/michalliu/gvimim
 2. windows用户使用管理员权限运行menu.bat后按提示操作，linux用户运行menu按提示操作
 
 已知问题
