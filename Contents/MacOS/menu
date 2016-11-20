@@ -11,3 +11,5 @@ fi
 set -x
 rm -rf ~/.vim
 ln -sf $BASEDIR/../Resources/vim/vimfiles ~/.vim
+ln -sf $BASEDIR/GVim /usr/local/bin/gvim
+ln -sf $BASEDIR/Vim /usr/local/bin/vim
