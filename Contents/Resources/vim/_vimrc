@@ -48,7 +48,7 @@ augroup end
 syntax on
 
 " 颜色主题
-" colorscheme zellner
+colorscheme zellner
 
 " http://vim.wikia.com/wiki/Converting_tabs_to_spaces
 " insert space when <tab> is down
