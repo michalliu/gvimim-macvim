@@ -1,5 +1,9 @@
 #!/bin/bash
-SCRIPT=$(readlink -f $0)
+if which greadlink;then
+SCRIPT=$(greadlink -f $0)
+else
+SCRIPT=$(greadlink $0)
+fi
 BASEDIR=$(cd $(dirname $SCRIPT);pwd)
 export VIM=$BASEDIR
 $BASEDIR/Vim_ $@
