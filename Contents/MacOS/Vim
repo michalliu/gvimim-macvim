@@ -1,9 +1,26 @@
 #!/bin/bash
-if which greadlink;then
-SCRIPT=$(greadlink -f $0)
-else
-SCRIPT=$(greadlink $0)
-fi
+#http://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
+canonicalize_path() {
+	if which greadlink >/dev/null 2>&1;then
+		greadlink -f $1
+	elif [ -d "$1" ]; then
+        _canonicalize_dir_path "$1"
+    else
+        _canonicalize_file_path "$1"
+    fi
+}   
+
+_canonicalize_dir_path() {
+    (cd "$1" 2>/dev/null && pwd -P) 
+}           
+
+_canonicalize_file_path() {
+    local dir file
+    dir=$(dirname -- "$1")
+    file=$(basename -- "$1")
+    (cd "$dir" 2>/dev/null && printf '%s/%s\n' "$(pwd -P)" "$file")
+}
+SCRIPT=$(canonicalize_path $0)
 BASEDIR=$(cd $(dirname $SCRIPT);pwd)
 export VIM=$BASEDIR
 $BASEDIR/Vim_ $@
