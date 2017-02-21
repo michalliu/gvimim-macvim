@@ -213,6 +213,7 @@ function! NERDTree_IsValid()
 endfunction
 
 " F8切换taglist的显示
+let g:winManagerWindowLayout="NERDTree|TagList"
 nmap <C-W><C-F> :FirstExplorerWindow<CR>
 nmap <C-W><C-B> :BottomExplorerWindow<CR>
 nmap <F8> :WMToggle<CR>
