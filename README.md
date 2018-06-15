@@ -1,4 +1,4 @@
-gvimIM (vim IMproved) - For Mac Users
+gvimIM (vim IMproved based on macvim) - For Mac Users
 =============
 
 Vim官网版只提供有限的功能，因为Vim的作者鼓励开发者独自进行编译，其中许多实用的功能并未打开。
