@@ -152,6 +152,8 @@ let appdata = expand('$VIM/.appdata')
 let g:jshint_rcfile = appdata.'/jshint/.jshintrc'
 " loadtemplate
 let g:template_path = appdata.'/load_template/templates/'
+" markdown-preview-sync
+let g:markdown_preview_sync_chrome_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 " 反注释条目以禁用javascript自动检查错误,可用<Leader>al手动激活
 " let g:jsflakes_autolint=0
