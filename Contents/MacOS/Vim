@@ -1,8 +1,8 @@
 #!/bin/bash
 #http://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
 canonicalize_path() {
-	if which greadlink >/dev/null 2>&1;then
-		greadlink -f $1
+	if which readlink >/dev/null 2>&1;then
+		readlink $1
 	elif [ -d "$1" ]; then
         _canonicalize_dir_path "$1"
     else

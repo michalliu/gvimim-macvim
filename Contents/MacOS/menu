@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT=$(readlink -f $0)
+SCRIPT=$(readlink $0)
 BASEDIR=$(cd $(dirname $SCRIPT);pwd)
 if [ -d ~/.vim ];then
 read -p "replace ~/.vim?" -n 1 -r
