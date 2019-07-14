@@ -1,12 +1,14 @@
 #!/bin/bash
 #http://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
 canonicalize_path() {
-	if which readlink >/dev/null 2>&1;then
-		readlink $1
-	elif [ -d "$1" ]; then
-        _canonicalize_dir_path "$1"
+	path="$1"
+	if [ -L $path ];then
+		path=$(readlink $1)
+	fi
+	if [ -d "$path" ]; then
+        _canonicalize_dir_path "$path"
     else
-        _canonicalize_file_path "$1"
+        _canonicalize_file_path "$path"
     fi
 }   
 
