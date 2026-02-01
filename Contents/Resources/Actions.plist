@@ -22,6 +22,8 @@
 	<string></string>
 	<key>findPrevious:</key>
 	<string></string>
+	<key>useSelectionForFind:</key>
+	<string></string>
 	<key>fontSizeDown:</key>
 	<string></string>
 	<key>fontSizeUp:</key>
@@ -34,7 +36,13 @@
 	<string></string>
 	<key>newWindow:</key>
 	<string></string>
+	<key>newWindowClean:</key>
+	<string></string>
+	<key>newWindowCleanNoDefaults:</key>
+	<string></string>
 	<key>openWebsite:</key>
+	<string></string>
+	<key>showWhatsNew:</key>
 	<string></string>
 	<key>orderFrontCharacterPalette:</key>
 	<string></string>
@@ -71,6 +79,22 @@
 	<key>unhideAllApplications:</key>
 	<string></string>
 	<key>zoomAll:</key>
+	<string></string>
+	<key>zoomLeft:</key>
+	<string></string>
+	<key>zoomRight:</key>
+	<string></string>
+	<key>stayInFront:</key>
+	<string></string>
+	<key>stayInBack:</key>
+	<string></string>
+	<key>stayLevelNormal:</key>
+	<string></string>
+	<key>_removeWindowFromStageManagerSet:</key>
+	<string></string>
+	<key>joinAllStageManagerSets:</key>
+	<string></string>
+	<key>unjoinAllStageManagerSets:</key>
 	<string></string>
 </dict>
 </plist>

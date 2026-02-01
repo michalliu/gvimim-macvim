@@ -1,17 +1,148 @@
 #!/bin/bash
-SCRIPT=$(readlink $0)
-BASEDIR=$(cd $(dirname $SCRIPT);pwd)
-if [ -d ~/.vim ];then
-read -p "replace ~/.vim?" -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]];then
-	exit 1
+#set -e  # 改为 set -e，遇到错误立即退出
+#set -x  # 改为 set -x，便于调试（可选）
+
+# 获取脚本所在目录的可靠方法
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+
+# 如果是符号链接，解析真实路径
+while [ -L "$SCRIPT_PATH" ]; do
+    SCRIPT_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" && pwd)"
+    SCRIPT_PATH="$(readlink "$SCRIPT_PATH")"
+    [[ $SCRIPT_PATH != /* ]] && SCRIPT_PATH="$SCRIPT_DIR/$SCRIPT_PATH"
+done
+
+BASEDIR="$(cd -P "$(dirname "$SCRIPT_PATH")" && pwd)"
+echo "Script directory: $BASEDIR"
+
+# ======================================
+# 1. 配置 ~/.vimrc
+# ======================================
+echo ""
+echo "==> Configuring vimrc..."
+
+VIMRC_SOURCE="$BASEDIR/../Resources/vim/_vimrc"
+
+if [ -f ~/.vimrc ] || [ -L ~/.vimrc ]; then
+    read -p "Replace existing ~/.vimrc? [y/N] " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Skipped vimrc configuration."
+    else
+        rm -f ~/.vimrc
+        ln -sf "$VIMRC_SOURCE" ~/.vimrc
+        echo "✓ Created ~/.vimrc -> $VIMRC_SOURCE"
+    fi
+else
+    ln -sf "$VIMRC_SOURCE" ~/.vimrc
+    echo "✓ Created ~/.vimrc -> $VIMRC_SOURCE"
 fi
+
+# ======================================
+# 2. 配置 ~/.gvimrc
+# ======================================
+echo ""
+echo "==> Configuring gvimrc..."
+
+GVIMRC_SOURCE="$BASEDIR/../Resources/vim/gvimrc"
+
+if [ -f ~/.gvimrc ] || [ -L ~/.gvimrc ]; then
+    read -p "Replace existing ~/.gvimrc? [y/N] " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Skipped gvimrc configuration."
+    else
+        rm -f ~/.gvimrc
+        ln -sf "$GVIMRC_SOURCE" ~/.gvimrc
+        echo "✓ Created ~/.gvimrc -> $GVIMRC_SOURCE"
+    fi
+else
+    ln -sf "$GVIMRC_SOURCE" ~/.gvimrc
+    echo "✓ Created ~/.gvimrc -> $GVIMRC_SOURCE"
 fi
-set -x
-rm -rf ~/.vim
-ln -sf $BASEDIR/../Resources/vim/vimfiles ~/.vim
-ln -sf $BASEDIR/GVim /usr/local/bin/gvim
-ln -sf $BASEDIR/Vim /usr/local/bin/vim
-ln -sf $BASEDIR/mvim /usr/local/bin/mvim
-ln -sf $BASEDIR/Vim /usr/local/bin/vi
+
+# ======================================
+# 3. 配置 ~/.vim (插件目录)
+# ======================================
+echo ""
+echo "==> Configuring ~/.vim..."
+
+VIMFILES_SOURCE="$BASEDIR/../Resources/vim/vimfiles"
+
+if [ -d ~/.vim ] || [ -L ~/.vim ]; then
+    read -p "Replace existing ~/.vim? [y/N] " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Skipped ~/.vim configuration."
+    else
+        rm -rf ~/.vim
+        ln -sf "$VIMFILES_SOURCE" ~/.vim
+        echo "✓ Created ~/.vim -> $VIMFILES_SOURCE"
+    fi
+else
+    ln -sf "$VIMFILES_SOURCE" ~/.vim
+    echo "✓ Created ~/.vim -> $VIMFILES_SOURCE"
+fi
+
+# ======================================
+# 4. 配置命令行工具
+# ======================================
+echo ""
+echo "==> Configuring command-line tools..."
+
+# 检查是否有 /usr/local/bin 权限
+if [ ! -w /usr/local/bin ]; then
+    echo "⚠️  Need sudo permission for /usr/local/bin"
+    USE_SUDO="sudo"
+else
+    USE_SUDO=""
+fi
+
+$USE_SUDO ln -sf "$BASEDIR/GVim" /usr/local/bin/gvim
+$USE_SUDO ln -sf "$BASEDIR/Vim" /usr/local/bin/vim
+$USE_SUDO ln -sf "$BASEDIR/mvim" /usr/local/bin/mvim
+$USE_SUDO ln -sf "$BASEDIR/Vim" /usr/local/bin/vi
+
+echo "✓ Created /usr/local/bin/{gvim,vim,mvim,vi}"
+
+# ======================================
+# 5. 验证安装
+# ======================================
+echo ""
+echo "==> Verifying installation..."
+
+if [ -L ~/.vimrc ]; then
+    echo "✓ ~/.vimrc -> $(readlink ~/.vimrc)"
+else
+    echo "✗ ~/.vimrc not configured"
+fi
+
+if [ -L ~/.gvimrc ]; then
+    echo "✓ ~/.gvimrc -> $(readlink ~/.gvimrc)"
+else
+    echo "✗ ~/.gvimrc not configured"
+fi
+
+if [ -L ~/.vim ]; then
+    echo "✓ ~/.vim -> $(readlink ~/.vim)"
+else
+    echo "✗ ~/.vim not configured"
+fi
+
+if [ -L /usr/local/bin/vim ]; then
+    echo "✓ vim -> $(/usr/local/bin/vim --version | head -1)"
+else
+    echo "✗ vim not configured"
+fi
+
+echo ""
+echo "✅ MacVim installation completed!"
+echo ""
+echo "Configuration files:"
+echo "  - ~/.vimrc  : Terminal & GUI common settings (301 lines)"
+echo "  - ~/.gvimrc : MacVim GUI-specific settings (111 lines)"
+echo "  - ~/.vim/   : Plugins and runtime files"
+echo ""
+echo "To verify, run:"
+echo "  Terminal Vim: vim -c ':echo \$MYVIMRC' -c 'q'"
+echo "  MacVim GUI:   mvim -c ':echo \$MYGVIMRC' -c 'q'"

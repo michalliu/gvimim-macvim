@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>15G31</string>
+	<string>23G93</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
@@ -1214,7 +1214,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>8.0</string>
+	<string>9.1.727</string>
 	<key>CFBundleSignature</key>
 	<string>VIMM</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -1235,26 +1235,36 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>114</string>
+	<string>180</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>8B62</string>
+	<string></string>
+	<key>DTPlatformName</key>
+	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>GM</string>
+	<string>14.2</string>
 	<key>DTSDKBuild</key>
-	<string>16B2649</string>
+	<string>23C53</string>
 	<key>DTSDKName</key>
-	<string>macosx10.12</string>
+	<string>macosx14.2</string>
 	<key>DTXcode</key>
-	<string>0810</string>
+	<string>1520</string>
 	<key>DTXcodeBuild</key>
-	<string>8B62</string>
+	<string>15C500b</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.13</string>
+	<key>MMWhatsNewURL</key>
+	<string>https://macvim.org/release-notes/whatsnew.html</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>MacVim uses Apple Events to allow you to communicate with other apps using Apple Script, and to support working as an ODB external editor.</string>
 	<key>NSAppleScriptEnabled</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -1278,6 +1288,7 @@
 			<key>NSSendTypes</key>
 			<array>
 				<string>NSStringPboardType</string>
+				<string>public.utf8-plain-text</string>
 			</array>
 		</dict>
 		<dict>
@@ -1294,16 +1305,19 @@
 			<dict/>
 			<key>NSSendTypes</key>
 			<array>
+				<string>public.file-url</string>
 				<string>NSFilenamesPboardType</string>
 			</array>
 			<key>NSUserData</key>
 			<string>Window</string>
 		</dict>
 	</array>
+	<key>SUEnableJavaScript</key>
+	<string>YES</string>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/macvim-dev/macvim/gh-pages/appcast/latest.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
+	<string>https://macvim.org/appcast/latest.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>Pt4zsg/8S3/mxKW7Cmt0cZFw/+2LOuXOYS93evP+Mfc=</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

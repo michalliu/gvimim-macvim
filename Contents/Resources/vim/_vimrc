@@ -299,3 +299,6 @@ if has("gui_running")
     au CursorMoved * if line('$') > &lines | set go+=r | else | set go-=r | endif
     au CursorMovedI * if line('$') > &lines | set go+=r | else | set go-=r | endif
 endif
+#vim在保存文件时会创建新文件，写入新内容，删除旧文件，重命名为原文件名，会导致inode变化,docker的bind mount绑定的是旧的inode
+#设置这个选项是在原文件上修改，因此不会有这个问题
+set backupcopy=yes
